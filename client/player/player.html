@@ -1,0 +1,15 @@
+<template name="player">
+    <div id="jp-player" class="container-fluid">
+        <div class="col-md-3">
+            <button id="player-back" type="button" class="btn btn-success">Back</button>
+            <h1>{{title}}</h1>
+            <a href="{{imdbURL}}" target="_blank"><img src="imdblogo2png"></a>
+        </div>
+        <div id="video-player" class="col-md-9">
+            <video width="800" height="500" controls poster="thumbnails/{{_id}}.jpg">
+                <source src="{{source}}" type="{{returnType filetype}}">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,5 @@
+div.new-half{
+    max-height: 50%;
+    max-width: 100%;
+    overflow: auto;
+}

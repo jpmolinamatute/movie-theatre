@@ -1,0 +1,33 @@
+div#gallery {
+    height: 350px;
+    width: 100%;
+    background-color: black;
+    display: inline-flex;
+}
+
+div#gallery-centre {
+    flex: 1;
+}
+
+div#gallery-left,
+div#gallery-right {
+    width: 50px;
+    position: relative;
+}
+
+button#move-left,
+button#move-right {
+    position: absolute;
+    top: 50%;
+    margin-top: -17px;
+}
+
+div#gallery-centre img {
+    display: none;
+}
+
+div#gallery-centre img.left,
+div#gallery-centre img.centre,
+div#gallery-centre img.right{
+    display: inline;
+}

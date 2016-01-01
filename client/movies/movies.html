@@ -1,0 +1,17 @@
+<template name="movies">
+    {{#with playerIsActive}}
+        {{> player}}
+    {{else}}
+        <div id="jp-movies">
+            {{# each list}}
+                <div class="row-table">
+                    {{# each row}}
+                        <div class="cell-table">
+                            <button type="button" data-type="go-to-movie"><img src="thumbnails/{{_id}}.jpg" alt="{{title}}"></button>
+                        </div>
+                    {{/each}}
+                </div>
+            {{/each}}
+        </div>
+    {{/with}}
+</template>

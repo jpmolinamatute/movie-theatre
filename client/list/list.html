@@ -1,0 +1,15 @@
+<template name="list">
+    <div id="gallery">
+        <div id="gallery-left">
+            <button id="move-left" type="button" class="btn btn-success">L</button>
+        </div>
+        <div id="gallery-centre">
+            {{# each thumbnails}}
+                <img src="{{thumbnailfile}}" alt="{{removeExt thumbnailfile}}" class="{{imgClass}}">
+            {{/each}}
+        </div>
+        <div id="gallery-right">
+            <button id="move-right" type="button" class="btn btn-success">R</button>
+        </div>
+    </div>
+</template>

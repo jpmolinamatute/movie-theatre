@@ -1,0 +1,16 @@
+div#jp-player{
+    background-color: black;
+    height: 100%;
+}
+
+div#jp-player h1 {
+    color: white;
+}
+
+div#video-player{
+    /*background-color: red;*/
+}
+
+div#video-player video{
+    /*background-color: blue;*/
+}
