@@ -1,3 +1,5 @@
+/* global Uploader: false*/
+/* global moviesCollection: false*/
 var isUpdate = new ReactiveVar(false);
 
 
@@ -18,7 +20,6 @@ function saveMovie(myID, $tr){
     }
     isUpdate.set(false);
 }
-
 
 Template.newMovie.events({
     "submit form#new-movie": function (event) {
@@ -51,7 +52,12 @@ Template.newMovie.events({
     "click table#new-list td button[data-action='save']": function (event) {
         "use strict";
         var $tr = $(event.currentTarget).closest("tr");
-        saveMovie(this._id, $tr)
+        saveMovie(this._id, $tr);
+        event.stopPropagation();
+    },
+    "click table#new-list td button[data-action='picture']": function (event){
+        "use strict";
+        console.log(this);
         event.stopPropagation();
     },
     "keypress table#new-list td input.form-control": function(event){
@@ -60,7 +66,7 @@ Template.newMovie.events({
         if(event.which === 13){
             event.preventDefault();
             $tr = $(event.currentTarget).closest("tr");
-            saveMovie(this._id, $tr)
+            saveMovie(this._id, $tr);
         }
     }
 });
@@ -83,4 +89,6 @@ Template.newMovie.helpers({
 Template.newMovie.onRendered(function () {
     "use strict";
     Meteor.subscribe("movies");
+    Uploader.uploadUrl = Meteor.absoluteUrl("thumbnails");
+    console.log(Uploader.uploadUrl);
 });
