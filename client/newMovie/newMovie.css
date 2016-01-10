@@ -1,26 +1,81 @@
-div.new-half{
-    max-height: 50%;
-    max-width: 100%;
+div.new-half {
+    height: 50%;
+    width: 100%;
+    overflow: hidden;
+}
+
+div#jp-movies-edit {
+    height: 100%;
+    width: 100%;
+}
+
+div.list-half {
+    height: 100%;
     overflow: auto;
+}
+
+img.movie-img,
+div.movie-detail {
+    display: inline-block;
+}
+
+div#movie-detail-g {
+    display: flex;
+    flex-direction: row;
+}
+
+div.movie-detail {
+    height: 317px;
+    flex: 1;
+}
+
+div.movie-detail span.tag {
+    font-weight: bold;
+}
+
+div#movie-controls {
+    position: relative;
+}
+
+div#movie-controls button {
+    width: 60px;
+    position: absolute;
+    left: 50%;
+    margin-left: -30px;
+    top: 50px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+button.list {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
 }
 
 .jqDropZone {
     background: lightgrey;
-    width: 100%;
-    height: 150px;
+    width: 214px;
+    height: 317px;
     line-height: 50px;
     text-align: center;
     font-weight: bold;
 }
+
 .jqDropZone.in {
-    width: 600px;
-    height: 200px;
+    width: 214px;
+    height: 317px;
     line-height: 200px;
     font-size: larger;
 }
+
 .jqDropZone.hover {
     background: lawngreen;
 }
+
 .jqDropZone.fade {
     -webkit-transition: all 0.3s ease-out;
     -moz-transition: all 0.3s ease-out;

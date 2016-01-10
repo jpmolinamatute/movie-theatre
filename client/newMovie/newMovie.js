@@ -1,24 +1,31 @@
 /* global Uploader: false*/
 /* global moviesCollection: false*/
-var isUpdate = new ReactiveVar(false);
 
-
-function saveMovie(myID, $tr){
+var toShow = new ReactiveVar(false);
+var toEdit = new ReactiveVar(false);
+function saveMovie(myID) {
     "use strict";
-    var $inputs = $tr.find("input.form-control");
-    var obj = {};
-    $inputs.each(function(key, value){
-        var $field = $(value);
-        var index= $field.attr("data-type");
-        if($field.val().length){
-            obj[index] = $field.val();
-        }
-    });
 
-    if(!_.isEmpty(obj)){
-        moviesCollection.update({_id: myID}, {$set:obj});
+    var obj;
+    var title = $("input#movie-detail-title").val().trim();
+    var genre = $("input#movie-detail-genre").val().trim();
+    var imdb = $("input#movie-detail-imdb").val().trim();
+    var filetype = $("input#movie-detail-filetype").val().trim();
+
+    if (title.length &&
+        genre.length &&
+        imdb.length &&
+        filetype.length
+    ) {
+        obj = {
+            "title": title,
+            "genre": genre,
+            "filetype": filetype,
+            "imdbURL": imdb
+        };
+
+        moviesCollection.update({_id: myID}, {$set: obj});
     }
-    isUpdate.set(false);
 }
 
 Template.newMovie.events({
@@ -44,51 +51,53 @@ Template.newMovie.events({
             }
         });
     },
-    "click table#new-list td button[data-action='edit']": function (event) {
+    "click ul#jp-movies-list button[data-type='list']": function (event) {
         "use strict";
-        isUpdate.set(this._id);
+
+        toShow.set(this);
+        toEdit.set(false);
         event.stopPropagation();
     },
-    "click table#new-list td button[data-action='save']": function (event) {
+    "click button#movie-action": function (event) {
         "use strict";
-        var $tr = $(event.currentTarget).closest("tr");
-        saveMovie(this._id, $tr);
-        event.stopPropagation();
-    },
-    "click table#new-list td button[data-action='picture']": function (event){
-        "use strict";
-        console.log(this);
-        event.stopPropagation();
-    },
-    "keypress table#new-list td input.form-control": function(event){
-        "use strict";
-        var $tr;
-        if(event.which === 13){
-            event.preventDefault();
-            $tr = $(event.currentTarget).closest("tr");
-            saveMovie(this._id, $tr);
+        var $button = $(event.currentTarget);
+
+        if ($button.attr("data-action") === "edit") {
+            toEdit.set(true);
+        } else {
+            saveMovie($button.attr("data-id"));
+            toEdit.set(false);
         }
+        event.stopPropagation();
     }
 });
+
 
 Template.newMovie.helpers({
     "list": function () {
         "use strict";
         return moviesCollection.find();
     },
-    toUpdate: function () {
+    show: function () {
         "use strict";
-        return isUpdate.get() === this._id;
+        return toShow.get();
     },
-    removeExt: function(movie){
+    edit: function () {
         "use strict";
-        return movie.slice(0, -4);
+        return toEdit.get();
+    },
+    action: function () {
+        "use strict";
+        return toEdit.get() ? "save" : "edit";
+    },
+    actionClass: function () {
+        "use strict";
+        return toEdit.get() ? "btn-success" : "btn-primary";
     }
 });
 
 Template.newMovie.onRendered(function () {
     "use strict";
-    Meteor.subscribe("movies");
+    Meteor.subscribe("newMovie");
     Uploader.uploadUrl = Meteor.absoluteUrl("thumbnails");
-    console.log(Uploader.uploadUrl);
 });

@@ -1,156 +1,138 @@
 <template name="newMovie">
-    <div class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Modal title</h4>
-                </div>
-                <div class="modal-body">
-                    <p>One fine body&hellip;</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-    <div class="new-half">
-        <table id="new-list" class="table table-striped">
-            <thead>
-            <tr>
-                <th>Title</th>
-                <th>IMDB URL</th>
-                <th>File Name</th>
-                <th>File Type</th>
-                <th>Genre</th>
-                <th>Thumbnail</th>
-                <th>Controls</th>
-            </tr>
-            </thead>
-            <tbody>
-            {{# each list}}
-                <tr>
-                    {{#if toUpdate}}
-                        <td>
-                            <input type="text" class="form-control" placeholder="{{title}}" data-type="title">
-                        </td>
-                        <td>
-                            <input type="text" class="form-control" placeholder="{{imdbURL}}" data-type="imdbURL">
-                        </td>
-                        <td>
-                            {{# if filename}}
-                                <input type="text" class="form-control" placeholder="{{filename}}" data-type="filename">
-                            {{else}}
-                                {{_id}}
-                            {{/if}}
-                        </td>
-                        <td>
-                            <input type="text" class="form-control" placeholder="{{filetype}}" data-type="filetype">
-                        </td>
-                        <td>
-                            <input type="text" class="form-control" placeholder="{{genre}}" data-type="genre">
-                        </td>
-                        <td>
-                        {{# if thumbnailfile}}
-                            <input type="text" class="form-control" placeholder="{{thumbnailfile}}" data-type="thumbnailfile">
-                        {{else}}
-                            {{_id}}
-                        {{/if}}
-                        </td>
-                        <td><button type="button" class="btn btn-xs btn-primary" data-action="save">S</button></td>
-                    {{else}}
-                    <td>{{title}}</td>
-                    <td><a href="{{imdbURL}}"><img src="imdblogo.jpg" alt="imdb" width="35" height="15"></a></td>
-                    <td>
-                        {{# if filename}}
-                            {{removeExt filename}}
-                        {{else}}
-                            {{_id}}
-                        {{/if}}
-                    </td>
-                    <td>{{filetype}}</td>
-                    <td>{{genre}}</td>
-                    <td>
-                        {{# if thumbnailfile}}
-                            {{thumbnailfile}}
-                        {{else}}
-                            {{_id}}
-                        {{/if}}
+    <div id="jp-movies-edit" class="row">
+        <div class="col-md-6 list-half">
+            <ul id="jp-movies-list">
+                {{# each list}}
+                    <li>
+                        <button type="button" data-type="list" class="list">{{title}}</button>
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+        <div class="col-md-6 movie-detail-g">
+            <div id="movie-detail-g">
+                {{# if edit}}
+                    {{> dropzone }}
+                    <div class="movie-detail">
+                        {{# with show}}
+                            <ul>
+                                <li>{{_id}}</li>
+                                <li>
+                                    <div class="form-group">
+                                        <label for="movie-detail-title">Title</label>
+                                        <input type="text" class="form-control" id="movie-detail-title" value="{{title}}" required>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-group">
+                                        <label for="movie-detail-genre">Genre</label>
+                                        <input type="text" class="form-control" id="movie-detail-genre" value="{{genre}}" required>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-group">
+                                        <label for="movie-detail-imdb">IMDB URL</label>
+                                        <input type="text" class="form-control" id="movie-detail-imdb" value="{{imdbURL}}" required>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-group">
+                                        <label for="movie-detail-filetype">File Type</label>
+                                        <input type="text" class="form-control" id="movie-detail-filetype" value="{{filetype}}" required>
+                                    </div>
+                                </li>
+                            </ul>
+                        {{/with}}
+                    </div>
+                {{else}}
+                    {{# with show}}
+                        <img src="{{_id}}.jpg" alt="{{title}}" height="317" width="214" class="movie-img">
+                        <div class="movie-detail">
+                            <ul>
+                                <li><span class="tag">Id:</span>  {{_id}}</li>
+                                <li><span class="tag">Title:</span> {{title}}</li>
+                                <li><span class="tag">Genre:</span> {{genre}}</li>
+                                <li>
+                                    <a href="{{imdbURL}}" target="_blank">
+                                        <img src="ui/imdblogo2.png" alt="imdb logo">
+                                    </a>
+                                </li>
+                                <li><span class="tag">File Type:</span> {{filetype}}</li>
+                            </ul>
+                        </div>
+                    {{/with}}
 
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-xs btn-success" data-action="edit">E</button>
-                        <button type="button" class="btn btn-xs btn-default" data-action="picture">P</button>
-                    </td>
-                    {{/if}}
-                </tr>
-            {{/each}}
-            </tbody>
-        </table>
+                {{/if}}
+            </div>
+            {{# if show}}
+                <div id="movie-controls">
+                    <button id="movie-action" data-id="{{show._id}}" type="button" class="btn btn-sm {{actionClass}}"
+                            data-action="{{action}}">{{action}}</button>
+                </div>
+            {{/if}}
+        </div>
     </div>
-    <div class="new-half">
-        <form id="new-movie" class="container-fluid">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="form-title">Title</label>
-                        <input type="text" class="form-control" id="form-title" name="title" required>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="form-imdbURL">IMDB URL</label>
-                        <input type="url" class="form-control" id="form-imdbURL" name="imdbURL" required>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="form-filename">File Name</label>
-                        <input type="text" class="form-control" id="form-filename" name="filename" required>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="form-filepath">File Path</label>
-                        <input type="text" class="form-control" id="form-filepath" name="filepath" value="/" required>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="form-filetype">File Type</label>
-                        <input type="text" class="form-control" id="form-filetype" name="filetype" maxlength="3"
-                               required>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="form-genre">Genre</label>
-                        <input type="text" class="form-control" id="form-genre" name="genre" required>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="form-thumbnailfile">Thumbnailfile</label>
-                        <input type="text" class="form-control" id="form-thumbnailfile" name="thumbnailfile"
-                               value="thumbnails/" required>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <button type="submit">Save</button>
-                </div>
-                <div class="col-md-4">
-                    <button type="reset">Clear</button>
-                </div>
-            </div>
-            <div class="row">
-                {{> dropzone }}
-            </div>
-        </form>
-    </div>
+    <!--<div class="row new-half">-->
+    <!--<form id="new-movie" class="container-fluid">-->
+    <!--<div class="row">-->
+    <!--<div class="col-md-4">-->
+    <!--<div class="form-group">-->
+    <!--<label for="form-title">Title</label>-->
+    <!--<input type="text" class="form-control" id="form-title" name="title" required>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="col-md-4">-->
+    <!--<div class="form-group">-->
+    <!--<label for="form-imdbURL">IMDB URL</label>-->
+    <!--<input type="url" class="form-control" id="form-imdbURL" name="imdbURL" required>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="col-md-4">-->
+    <!--<div class="form-group">-->
+    <!--<label for="form-filename">File Name</label>-->
+    <!--<input type="text" class="form-control" id="form-filename" name="filename" required>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row">-->
+    <!--<div class="col-md-4">-->
+    <!--<div class="form-group">-->
+    <!--<label for="form-filepath">File Path</label>-->
+    <!--<input type="text" class="form-control" id="form-filepath" name="filepath" value="/" required>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="col-md-4">-->
+    <!--<div class="form-group">-->
+    <!--<label for="form-filetype">File Type</label>-->
+    <!--<input type="text" class="form-control" id="form-filetype" name="filetype" maxlength="3"-->
+    <!--required>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="col-md-4">-->
+    <!--<div class="form-group">-->
+    <!--<label for="form-genre">Genre</label>-->
+    <!--<input type="text" class="form-control" id="form-genre" name="genre" required>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row">-->
+    <!--<div class="col-md-4">-->
+    <!--<div class="form-group">-->
+    <!--<label for="form-thumbnailfile">Thumbnailfile</label>-->
+    <!--<input type="text" class="form-control" id="form-thumbnailfile" name="thumbnailfile"-->
+    <!--value="thumbnails/" required>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="col-md-4">-->
+    <!--<button type="submit">Save</button>-->
+    <!--</div>-->
+    <!--<div class="col-md-4">-->
+    <!--<button type="reset">Clear</button>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row">-->
+    <!--{{> dropzone }}-->
+    <!--</div>-->
+    <!--</form>-->
+    <!--</div>-->
 </template>

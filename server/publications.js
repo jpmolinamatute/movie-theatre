@@ -1,3 +1,4 @@
+/* global moviesCollection: false */
 moviesCollection.allow({
     insert: function (userId) {
         "use strict";
@@ -23,8 +24,13 @@ Meteor.publish("thumbnails", function () {
     return moviesCollection.find({}, {fields:{"title": 1}});
 });
 
+Meteor.publish("newMovie", function () {
+    "use strict";
+
+    return moviesCollection.find({}, {sort:{title:1}});
+});
 Meteor.publish("movies", function () {
     "use strict";
 
-    return moviesCollection.find({"exists" : true});
+    return moviesCollection.find({"exists" : true}, {sort:{title:1}});
 });
