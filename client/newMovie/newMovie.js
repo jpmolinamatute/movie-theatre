@@ -25,31 +25,23 @@ function saveMovie(myID) {
         };
 
         moviesCollection.update({_id: myID}, {$set: obj});
+        obj._id = myID;
+        toShow.set(obj);
     }
 }
 
 Template.newMovie.events({
-    "submit form#new-movie": function (event) {
+    "click button#jp-movies-add": function(event){
         "use strict";
-
-        var obj = {
-            title: $(event.target.title).val(),
-            imdbURL: $(event.target.imdbURL).val(),
-            filename: $(event.target.filename).val(),
-            filepath: $(event.target.filepath).val(),
-            filetype: $(event.target.filetype).val(),
-            genre: $(event.target.genre).val(),
-            thumbnailfile: $(event.target.thumbnailfile).val()
-        };
-        event.preventDefault();
-        moviesCollection.insert(obj, function (error, _id) {
+        moviesCollection.insert({exist: false}, function (error, _id) {
             if (error) {
                 console.error(error);
-                console.log(obj);
             } else if (_id) {
-                event.target.reset();
+                toShow.set({"_id": _id});
+                toEdit.set(true);
             }
         });
+        event.stopPropagation();
     },
     "click ul#jp-movies-list button[data-type='list']": function (event) {
         "use strict";
@@ -76,7 +68,7 @@ Template.newMovie.events({
 Template.newMovie.helpers({
     "list": function () {
         "use strict";
-        return moviesCollection.find();
+        return moviesCollection.find({}, {sort:{title:1}});
     },
     show: function () {
         "use strict";

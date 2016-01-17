@@ -29,6 +29,7 @@ Meteor.publish("newMovie", function () {
 
     return moviesCollection.find({}, {sort:{title:1}});
 });
+
 Meteor.publish("movies", function () {
     "use strict";
 

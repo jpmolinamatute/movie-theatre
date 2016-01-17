@@ -12,11 +12,13 @@
         <div class="col-md-6 movie-detail-g">
             <div id="movie-detail-g">
                 {{# if edit}}
-                    {{> dropzone }}
+                    <!-- contentType="images" fileTypes=".jpg"  formData=show-->
+
+                    {{> upload_bootstrap }}
                     <div class="movie-detail">
                         {{# with show}}
                             <ul>
-                                <li>{{_id}}</li>
+                                <li><span class="tag">Id:</span> {{_id}}</li>
                                 <li>
                                     <div class="form-group">
                                         <label for="movie-detail-title">Title</label>
@@ -71,68 +73,6 @@
                 </div>
             {{/if}}
         </div>
+        <button id="jp-movies-add" type="button" class="btn btn-danger">Add...</button>
     </div>
-    <!--<div class="row new-half">-->
-    <!--<form id="new-movie" class="container-fluid">-->
-    <!--<div class="row">-->
-    <!--<div class="col-md-4">-->
-    <!--<div class="form-group">-->
-    <!--<label for="form-title">Title</label>-->
-    <!--<input type="text" class="form-control" id="form-title" name="title" required>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--<div class="col-md-4">-->
-    <!--<div class="form-group">-->
-    <!--<label for="form-imdbURL">IMDB URL</label>-->
-    <!--<input type="url" class="form-control" id="form-imdbURL" name="imdbURL" required>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--<div class="col-md-4">-->
-    <!--<div class="form-group">-->
-    <!--<label for="form-filename">File Name</label>-->
-    <!--<input type="text" class="form-control" id="form-filename" name="filename" required>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--<div class="row">-->
-    <!--<div class="col-md-4">-->
-    <!--<div class="form-group">-->
-    <!--<label for="form-filepath">File Path</label>-->
-    <!--<input type="text" class="form-control" id="form-filepath" name="filepath" value="/" required>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--<div class="col-md-4">-->
-    <!--<div class="form-group">-->
-    <!--<label for="form-filetype">File Type</label>-->
-    <!--<input type="text" class="form-control" id="form-filetype" name="filetype" maxlength="3"-->
-    <!--required>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--<div class="col-md-4">-->
-    <!--<div class="form-group">-->
-    <!--<label for="form-genre">Genre</label>-->
-    <!--<input type="text" class="form-control" id="form-genre" name="genre" required>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--<div class="row">-->
-    <!--<div class="col-md-4">-->
-    <!--<div class="form-group">-->
-    <!--<label for="form-thumbnailfile">Thumbnailfile</label>-->
-    <!--<input type="text" class="form-control" id="form-thumbnailfile" name="thumbnailfile"-->
-    <!--value="thumbnails/" required>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--<div class="col-md-4">-->
-    <!--<button type="submit">Save</button>-->
-    <!--</div>-->
-    <!--<div class="col-md-4">-->
-    <!--<button type="reset">Clear</button>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--<div class="row">-->
-    <!--{{> dropzone }}-->
-    <!--</div>-->
-    <!--</form>-->
-    <!--</div>-->
 </template>

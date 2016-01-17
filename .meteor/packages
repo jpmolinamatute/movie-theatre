@@ -21,9 +21,9 @@ reactive-var
 meteorhacks:npm
 
 
-tomi:upload-server
-tomi:upload-jquery
 iron:router
 
 
 npm-container
+tomi:upload-jquery
+tomi:upload-server
