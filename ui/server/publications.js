@@ -16,8 +16,8 @@ moviesCollection.allow({
         'use strict';
 
         return true;
-    }//,
-    //fetch: ["_id", "owner"]
+    },
+    fetch: ["_id", "active"]
 });
 
 Meteor.publish('movies', function () {

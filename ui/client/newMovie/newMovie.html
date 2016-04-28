@@ -1,91 +1,78 @@
 <template name="newMovie">
     <div id="jp-movies-edit" class="row">
-        <div class="col-md-6 list-half">
+        <div class="col-md-4">
             <ul id="jp-movies-list">
                 {{# each list}}
                     <li>
-                        <button type="button" data-type="list" class="list">
-                            {{#if title}}
-                                {{title}}
-                            {{else}}
-                                {{_id}}
-                            {{/if}}
-                        </button>
+                        <button type="button" data-type="list" class="list">{{title}}</button>
                     </li>
                 {{/each}}
             </ul>
         </div>
-        <div class="col-md-6 movie-detail-g">
-            <div id="movie-detail-g">
-                {{# if edit}}
-                    <!--contentType="images" fileTypes=".jpg"  formData=show-->
-                    {{> upload_bootstrap }}
-                    <div class="movie-detail">
-                        {{# with show}}
-                            <ul>
-                                <li><span class="tag">Id:</span> {{_id}}</li>
-                                <li>
-                                    <div class="form-group">
-                                        <label for="movie-detail-title">Title</label>
-                                        <input type="text" class="form-control" id="movie-detail-title"
-                                               value="{{title}}" required>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="form-group">
-                                        <label for="movie-detail-genre">Genre</label>
-                                        <select class="form-control" id="movie-detail-genre">
-                                            {{#each genreList}}
-                                                <option value="{{_id}}" selected="{{sameGenre ../genre _id}}">{{_id}}</option>
-                                            {{/each}}
-                                        </select>
-                                        <!--<input type="text" class="form-control" id="movie-detail-genre"-->
-                                        <!--value="{{genre}}" required>-->
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="form-group">
-                                        <label for="movie-detail-imdb">IMDB ID</label>
-                                        <input type="text" class="form-control" id="movie-detail-imdb"
-                                               value="{{imdbID}}" required>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="form-group">
-                                        <label for="movie-detail-filetype">File Type</label>
-                                        <input type="text" class="form-control" id="movie-detail-filetype"
-                                               value="{{filetype}}" required>
-                                    </div>
-                                </li>
-                            </ul>
-                        {{/with}}
-                    </div>
-                {{else}}
-                    {{# with show}}
-                        <img src="{{_id}}.jpg" alt="{{title}}" height="317" width="214" class="movie-img">
-                        <div class="movie-detail">
-                            <ul>
-                                <li><span class="tag">Id:</span>  {{_id}}</li>
-                                <li><span class="tag">Title:</span> {{title}}</li>
-                                <li><span class="tag">Genre:</span> {{genre}}</li>
-                                <li>
-                                    <a href="http://www.imdb.com/title/{{imdbID}}/" target="_blank">
-                                        <img src="ui/imdblogo2.png" alt="imdb logo">
-                                    </a>
-                                </li>
-                                <li><span class="tag">File Type:</span> {{filetype}}</li>
-                            </ul>
-                        </div>
-                    {{/with}}
-                {{/if}}
-            </div>
-            {{# if show}}
-                <div id="movie-controls">
-                    <button id="movie-action" data-id="{{show._id}}" type="button" class="btn btn-sm {{actionClass}}"
-                            data-action="{{action}}">{{action}}</button>
+        <div class="col-md-8">
+            {{# with show}}
+                <div id="movie-detail">
+                    <img src="{{_id}}.jpg" alt="{{title}}" height="317" width="214" class="movie-img">
+                    <ul>
+                        {{# if edit}}
+
+                            <li><span class="tag">Id:</span> {{_id}}</li>
+                            <li>
+                                <div class="form-group">
+                                    <label for="movie-detail-title">Title</label>
+                                    <input type="text" class="form-control" id="movie-detail-title"
+                                           value="{{title}}" required>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="form-group">
+                                    <label for="movie-detail-genre">Genre</label>
+                                    <select class="form-control" id="movie-detail-genre">
+                                        {{#each genreList}}
+                                            <option value="{{_id}}"
+                                                    selected="{{sameGenre ../genre _id}}">{{_id}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="form-group">
+                                    <label for="movie-detail-imdb">IMDB ID</label>
+                                    <input type="text" class="form-control" id="movie-detail-imdb"
+                                           value="{{imdbID}}" required>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="form-group">
+                                    <label for="movie-detail-filetype">File Type</label>
+                                    <select class="form-control" id="movie-detail-filetype">
+                                        <option value="-" selected="{{sameGenre '-' filetype}}">-</option>
+                                        <option value="mp4" selected="{{sameGenre 'mp4' filetype}}">mp4</option>
+                                        <option value="mkv" selected="{{sameGenre 'mkv' filetype}}">mkv</option>
+                                    </select>
+                                </div>
+                            </li>
+                            <li>
+                                {{> upload_bootstrap }}
+                            </li>
+                        {{else}}
+                            <li><span class="tag">Id:</span>  {{_id}}</li>
+                            <li><span class="tag">Title:</span> {{title}}</li>
+                            <li><span class="tag">Genre:</span> {{genre}}</li>
+                            <li>
+                                <a href="http://www.imdb.com/title/{{imdbID}}/" target="_blank">
+                                    <img src="ui/imdblogo2.png" alt="imdb logo">
+                                </a>
+                            </li>
+                            <li><span class="tag">File Type:</span> {{filetype}}</li>
+                        {{/if}}
+                    </ul>
                 </div>
-            {{/if}}
+                <button id="movie-action" type="button" class="btn btn-sm {{actionClass}}"
+                        data-action="{{action}}">{{action}}</button>
+                <button id="movie-remove" type="button" class="btn btn-sm btn-danger">Remove</button>
+            {{/with}}
+            <button id="jp-movies-add" type="button" class="btn btn-sm btn-success">Add...</button>
         </div>
-        <button id="jp-movies-add" type="button" class="btn btn-danger">Add...</button>
     </div>
 </template>

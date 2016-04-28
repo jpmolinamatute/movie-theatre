@@ -1,6 +1,8 @@
 html,
-body,
-div#jp-main{
+body{
     height: 100%;
     width: 100%;
+}
+div#jp-main{
+   height: 100%;
 }

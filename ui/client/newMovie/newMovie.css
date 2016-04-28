@@ -1,65 +1,68 @@
-button#jp-movies-add {
+button#jp-movies-add,
+button#movie-action,
+button#movie-remove{
     position: absolute;
-    top: 90%;
-    left: 40%;
+    bottom: 0;
 }
 
-div.new-half {
-    height: 50%;
-    width: 100%;
-    overflow: hidden;
+button#jp-movies-add {
+    right: 40px;
 }
+
+button#movie-action {
+    left: 275px;
+
+}
+
+button#movie-remove{
+    left: calc(50% + 107px);
+    margin-left: -35px;
+    width: 70px;
+}
+
 
 div#jp-movies-edit {
     height: 100%;
-    width: 100%;
+    max-height: 100% !important;
 }
 
-div.list-half {
-    height: 100%;
+div#jp-movies-edit > div.col-md-4 {
+    max-height: 100%;
     overflow: auto;
 }
 
-img.movie-img,
-div.movie-detail {
-    display: inline-block;
+div#jp-movies-edit > div.col-md-8 {
+    min-height: 400px;
 }
 
-div#movie-detail-g {
+div#movie-detail{
     display: flex;
-    flex-direction: row;
+
 }
 
-div.movie-detail {
-    height: 317px;
+div#movie-detail img.movie-img{
+    width: 214px;
+}
+
+div#movie-detail ul{
     flex: 1;
 }
 
-div.movie-detail span.tag {
+div#movie-detail img.movie-img,
+div#movie-detail ul {
+    display: inline-block;
+}
+
+div#movie-detail span.tag {
     font-weight: bold;
 }
 
-div#movie-controls {
-    position: relative;
-}
 
-div#movie-controls button {
-    width: 60px;
-    position: absolute;
-    left: 50%;
-    margin-left: -30px;
-    top: 50px;
-}
 
 ul {
     list-style-type: none;
 }
 
-
-ul#jp-movies-list button {
-    color:black;
-    cursor: pointer;
-}
 button.list {
     border: none;
     background-color: transparent;

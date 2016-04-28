@@ -1,16 +1,16 @@
 /* global Uploader: false*/
 /* global moviesCollection: false*/
 
-var toShow = new ReactiveVar(false);
+
 var toEdit = new ReactiveVar(false);
 function saveMovie(myID) {
     'use strict';
 
     var obj;
     var title = $('input#movie-detail-title').val().trim();
-    var genre = $('input#movie-detail-genre').val().trim();
+    var genre = $('select#movie-detail-genre').val().trim();
     var imdb = $('input#movie-detail-imdb').val().trim();
-    var filetype = $('input#movie-detail-filetype').val().trim();
+    var filetype = $('select#movie-detail-filetype').val().trim();
 
     if (title.length &&
         genre.length &&
@@ -24,54 +24,60 @@ function saveMovie(myID) {
             imdbID: imdb
         };
 
-        moviesCollection.update({ _id: myID }, { $set: obj }, {}, function (error) {
-            if (error) {
-                console.error(error);
-            }else {
-                obj._id = myID;
-                toShow.set(obj);
-            }
-        });
-
+        Meteor.call('updateMovie', {_id: myID}, {$set:obj});
     }
 }
 
 Template.newMovie.events({
     'click button#jp-movies-add': function (event) {
         'use strict';
-        moviesCollection.insert({ exist: false }, function (error, _id) {
-            if (error) {
+
+        Meteor.call('updateMovie', {active:true}, {$set:{active:false}},{multi: true}, function(error){
+            if(error){
                 console.error(error);
-            } else if (_id) {
-                toShow.set({ _id: _id });
+            } else{
+                moviesCollection.insert({ active:true });
                 toEdit.set(true);
             }
         });
-
         event.stopPropagation();
     },
-
-    "click ul#jp-movies-list button[data-type='list']": function (event) {
+    'click button#movie-remove': function(event){
+        'use strict';
+        var id = this._id;
+        moviesCollection.remove({_id: id});
+        event.stopPropagation();
+    },
+    'click ul#jp-movies-list button[data-type="list"]': function (event) {
         'use strict';
 
-        toShow.set(this);
+        var id = this._id;
+
+        moviesCollection.update({_id:id}, {$set:{active:true}});
+        Meteor.call('updateMovie', {active:true}, {$set:{active:false}},{multi: true}, function(error){
+            if(error){
+                console.error(error);
+            } else{
+                moviesCollection.update({_id:id}, {$set:{active:true}});
+            }
+        });
         toEdit.set(false);
         event.stopPropagation();
     },
 
     'click button#movie-action': function (event) {
         'use strict';
+        var id = this._id;
         var $button = $(event.currentTarget);
-
-        if ($button.attr('data-action') === 'edit') {
+        if ($button.attr('data-action') === 'Edit') {
             toEdit.set(true);
-        } else {
-            saveMovie($button.attr('data-id'));
+        } else if ($button.attr('data-action') === 'Save'){
+            saveMovie(id);
             toEdit.set(false);
         }
 
         event.stopPropagation();
-    },
+    }
 });
 
 Template.newMovie.helpers({
@@ -87,13 +93,12 @@ Template.newMovie.helpers({
 
     sameGenre: function (listGender, gender) {
         'use strict';
-        console.log(listGender, gender);
         return listGender === gender;
     },
 
     show: function () {
         'use strict';
-        return toShow.get();
+        return moviesCollection.findOne({active:true});
     },
 
     edit: function () {
@@ -103,7 +108,7 @@ Template.newMovie.helpers({
 
     action: function () {
         'use strict';
-        return toEdit.get() ? 'save' : 'edit';
+        return toEdit.get() ? 'Save' : 'Edit';
     },
 
     actionClass: function () {
@@ -114,6 +119,6 @@ Template.newMovie.helpers({
 
 Template.newMovie.onRendered(function () {
     'use strict';
-
+    Meteor.call('updateMovie', {active:true}, {$set:{active:false}},{multi: true});
     Uploader.uploadUrl = Meteor.absoluteUrl('thumbnails');
 });
