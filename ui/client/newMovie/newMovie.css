@@ -55,6 +55,11 @@ ul {
     list-style-type: none;
 }
 
+
+ul#jp-movies-list button {
+    color:black;
+    cursor: pointer;
+}
 button.list {
     border: none;
     background-color: transparent;

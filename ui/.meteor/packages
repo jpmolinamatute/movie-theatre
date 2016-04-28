@@ -29,3 +29,4 @@ tomi:upload-server
 standard-minifier-css
 standard-minifier-js
 iron:middleware-stack@1.1.0
+twbs:bootstrap

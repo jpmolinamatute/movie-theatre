@@ -3,7 +3,7 @@
 Template.player.onRendered(function () {
     'use strict';
 
-  });
+});
 
 Template.player.helpers({
     baseurl: function () {
@@ -12,7 +12,7 @@ Template.player.helpers({
         var url = tmp[0] + ':' + tmp[1] + ':80/';
 
         return url;
-      },
+    },
 
     returnType: function (type) {
         'use strict';
@@ -20,14 +20,14 @@ Template.player.helpers({
         var text = 'video/';
 
         if (type === 'mp4') {
-          text += 'mp4';
+            text += 'mp4';
         } else if (type === 'mkv') {
-          text += 'webm';
+            text += 'webm';
         }
 
         return text;
-      },
-  });
+    },
+});
 
 Template.player.events({
     'click button#player-back': function (event) {
@@ -35,15 +35,15 @@ Template.player.events({
 
         playerActive.set(false);
         event.stopPropagation();
-      },
+    },
 
     'mouseenter div#video-player video': function (event) {
         'use strict';
         event.currentTarget.setAttribute('controls', 'controls');
-      },
+    },
 
     'mouseleave div#video-player video': function (event) {
         'use strict';
         event.currentTarget.removeAttribute('controls');
-      },
-  });
+    },
+});

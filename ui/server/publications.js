@@ -1,37 +1,33 @@
 /* global moviesCollection: false */
 moviesCollection.allow({
-    insert: function (userId) {
-        "use strict";
+    insert: function () {
+        'use strict';
 
         return true;
     },
-    update: function (userId, doc) {
-        "use strict";
+
+    update: function () {
+        'use strict';
 
         return true;
     },
-    remove: function (userId, doc) {
-        "use strict";
+
+    remove: function () {
+        'use strict';
 
         return true;
     }//,
     //fetch: ["_id", "owner"]
 });
 
-Meteor.publish("thumbnails", function () {
-    "use strict";
+Meteor.publish('movies', function () {
+    'use strict';
 
-    return moviesCollection.find({}, {fields:{"title": 1}});
+    return moviesCollection.find();
 });
 
-Meteor.publish("newMovie", function () {
-    "use strict";
+Meteor.publish('genre', function () {
+    'use strict';
 
-    return moviesCollection.find({}, {sort:{title:1}});
-});
-
-Meteor.publish("movies", function () {
-    "use strict";
-
-    return moviesCollection.find({"exists" : true}, {sort:{title:1}});
+    return moviesGenre.find();
 });
