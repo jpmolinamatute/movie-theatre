@@ -27,7 +27,7 @@
                             <li>
                                 <div class="form-group">
                                     <label for="movie-detail-genre">Genre</label>
-                                    <select class="form-control" id="movie-detail-genre">
+                                    <select class="form-control" id="movie-detail-genre" multiple>
                                         {{#each genreList}}
                                             <option value="{{_id}}"
                                                     selected="{{sameGenre ../genre _id}}">{{_id}}</option>
@@ -46,9 +46,9 @@
                                 <div class="form-group">
                                     <label for="movie-detail-filetype">File Type</label>
                                     <select class="form-control" id="movie-detail-filetype">
-                                        <option value="-" selected="{{sameGenre '-' filetype}}">-</option>
-                                        <option value="mp4" selected="{{sameGenre 'mp4' filetype}}">mp4</option>
-                                        <option value="mkv" selected="{{sameGenre 'mkv' filetype}}">mkv</option>
+                                        <option value="-" selected="{{sameFileType '-' filetype}}">-</option>
+                                        <option value="mp4" selected="{{sameFileType 'mp4' filetype}}">mp4</option>
+                                        <option value="mkv" selected="{{sameFileType 'mkv' filetype}}">mkv</option>
                                     </select>
                                 </div>
                             </li>
@@ -72,7 +72,7 @@
                         data-action="{{action}}">{{action}}</button>
                 <button id="movie-remove" type="button" class="btn btn-sm btn-danger">Remove</button>
             {{/with}}
-            <button id="jp-movies-add" type="button" class="btn btn-sm btn-success">Add...</button>
+            <!--<button id="jp-movies-add" type="button" class="btn btn-sm btn-success">Add...</button>-->
         </div>
     </div>
 </template>

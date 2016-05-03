@@ -3,14 +3,16 @@
         <div class="col-md-3">
             <button id="player-back" type="button" class="btn btn-success">Back</button>
             <h1>{{title}}</h1>
-            <h6>{{_id}}  {{filetype}}</h6>
+            <h6>{{_id}}</h6>
             <a href="http://www.imdb.com/title/{{imdbID}}/" target="_blank"><img src="ui/imdblogo2.png" alt="imdb logo"></a>
         </div>
         <div id="video-player" class="col-md-9">
-            <video width="800" height="500" poster="{{_id}}.jpg">
+            <input id="video-controls" type="text" data-status="pause" size="0" accesskey="p">
+            <video id="jp-video" width="800" height="500" poster="{{_id}}.jpg">
                 <source src="{{_id}}.{{filetype}}" type="{{returnType filetype}}">
                 Your browser does not support the video tag.
             </video>
+
         </div>
     </div>
 </template>

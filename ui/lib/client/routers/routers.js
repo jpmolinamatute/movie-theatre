@@ -8,18 +8,9 @@ Router.route("/", function () {
     }
 });
 
-
-Router.route('/player', function(){
-    this.render('player', {
-        data: function(){
-            console.log(this.params);
-            return {'id': this.params.query.id};
-        }
-    })
-});
-
 Router.route('newMovie', function () {
     "use strict";
+    this.subscribe('active');
     this.subscribe('genre');
     this.subscribe('movies').wait();
     if (this.ready()) {

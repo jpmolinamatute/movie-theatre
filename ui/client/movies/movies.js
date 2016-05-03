@@ -11,34 +11,34 @@ Template.movies.helpers({
     list: function (){
         'use strict';
 
-        var result = false;
-        var top = 0;
-        var left = 0;
-        var width = 1200;
+        var result;
+        var top         = 0;
+        var left        = 0;
+        var width       = 1200;
         var imageHeight = 357;
-        var imageWidth = 254;
-//        {filetype: "mp4"}
+        var imageWidth  = 254;
 
-            result = moviesCollection.find({filetype:{$ne:"-"}},{sort:{title:1}}).map(function (doc){
-                var currentHeight = top * imageHeight;
-                var currentWidth = left * imageWidth;
-                if(currentWidth >= width){
-                    top++;
-                    left = 0;
-                    currentHeight = top * imageHeight;
-                    currentWidth = left * imageWidth
-                }
-                doc.top  = currentHeight + "px";
-                doc.left = currentWidth + "px";
-                left++;
-                return doc;
-            });
+
+        result = moviesCollection.find({}, {sort: {title: 1}}).map(function (doc){
+            var currentHeight = top * imageHeight;
+            var currentWidth  = left * imageWidth;
+            if (currentWidth >= width) {
+                top++;
+                left          = 0;
+                currentHeight = top * imageHeight;
+                currentWidth  = left * imageWidth
+            }
+            doc.top  = currentHeight + "px";
+            doc.left = currentWidth + "px";
+            left++;
+            return doc;
+        });
 
         return result;
     }
 });
 
-Template.movies.onRendered(function () {
+Template.movies.onRendered(function (){
     'use strict';
 });
 

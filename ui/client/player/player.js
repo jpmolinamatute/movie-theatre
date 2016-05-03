@@ -2,7 +2,7 @@
 
 Template.player.onRendered(function () {
     'use strict';
-
+//    this.$('input#video-controls').focus();
 });
 
 Template.player.helpers({
@@ -46,4 +46,26 @@ Template.player.events({
         'use strict';
         event.currentTarget.removeAttribute('controls');
     },
+    'play video#jp-video': function(){
+        'use strict';
+        var $input = $("input#video-controls");
+        $input.attr("data-status", "play");
+//        $input.focus();
+    },
+    'pause video#jp-video': function(){
+        'use strict';
+        var $input = $("input#video-controls");
+        $input.attr("data-status", "pause");
+    },
+    'focus input#video-controls, keypress input#video-controls': function(event){
+        'use strict';
+        console.log("hola!");
+        var status = $(event.currentTarget).attr("data-status");
+        var $video = $("video#jp-video");
+        if(status === "pause"){
+            $video.get(0).play();
+        }else if(status === "play"){
+            $video.get(0).pause();
+        }
+    }
 });

@@ -32,7 +32,7 @@ div#jp-movies-edit > div.col-md-4 {
 }
 
 div#jp-movies-edit > div.col-md-8 {
-    min-height: 400px;
+    min-height: 440px;
 }
 
 div#movie-detail{
@@ -62,7 +62,9 @@ div#movie-detail span.tag {
 ul {
     list-style-type: none;
 }
-
+ul#jp-movies-list *{
+    text-align: left;
+}
 button.list {
     border: none;
     background-color: transparent;
