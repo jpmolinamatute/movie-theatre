@@ -17,15 +17,11 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 
 underscore
 reactive-var
-meteorhacks:npm
 
 
 iron:router
 
 
-npm-container
-tomi:upload-jquery
-tomi:upload-server
 standard-minifier-css
 standard-minifier-js
 iron:middleware-stack@1.1.0

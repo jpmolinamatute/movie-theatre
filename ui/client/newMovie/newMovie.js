@@ -120,5 +120,4 @@ Template.newMovie.helpers({
 Template.newMovie.onRendered(function () {
     'use strict';
     Meteor.call('updateMovie', {active:true}, {$set:{active:false}},{multi: true});
-    Uploader.uploadUrl = Meteor.absoluteUrl('thumbnails');
 });

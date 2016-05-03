@@ -1,47 +1,55 @@
 /* global moviesCollection: false */
 /* global playerActive:true */
 playerActive = new ReactiveVar(false);
+
 Template.movies.helpers({
-    playerIsActive: function () {
+    playerIsActive: function (){
         'use strict';
         return playerActive.get();
     },
 
-    list: function () {
+    list: function (){
         'use strict';
-        var list = [];
-        var tmp = [];
-        var index = 0;
-        moviesCollection.find({}, { sort: { title: 1 } }).forEach(function (doc) {
-            if (index < 5) {
-                tmp.push(doc);
-                index++;
-            } else {
-                index = 1;
-                list.push({ row: tmp.slice() });
-                tmp = [doc];
-            }
-        });
 
-        list.push({ row: tmp.slice() });
-        return list;
+        var result = false;
+        var top = 0;
+        var left = 0;
+        var width = 1200;
+        var imageHeight = 357;
+        var imageWidth = 254;
+//        {filetype: "mp4"}
+
+            result = moviesCollection.find({filetype:{$ne:"-"}},{sort:{title:1}}).map(function (doc){
+                var currentHeight = top * imageHeight;
+                var currentWidth = left * imageWidth;
+                if(currentWidth >= width){
+                    top++;
+                    left = 0;
+                    currentHeight = top * imageHeight;
+                    currentWidth = left * imageWidth
+                }
+                doc.top  = currentHeight + "px";
+                doc.left = currentWidth + "px";
+                left++;
+                return doc;
+            });
+
+        return result;
     }
 });
 
 Template.movies.onRendered(function () {
     'use strict';
-    console.log(moviesCollection.find().fetch());
-
 });
 
 Template.movies.events({
-    "click div#jp-movies button[data-type='go-to-movie']": function (event) {
+    'click div#jp-movies button[data-type="go-to-movie"]': function (event){
         'use strict';
         playerActive.set(this);
         event.stopPropagation();
     },
 
-    'click button#player-back': function (event) {
+    'click button#player-back': function (event){
         playerActive.set(false);
         event.stopPropagation();
     },

@@ -4,14 +4,10 @@
     {{else}}
         <div id="jp-movies">
             {{# each list}}
-                <div class="row-table">
-                    {{# each row}}
-                        <div class="cell-table">
-                            <button type="button" data-type="go-to-movie">
-                                <img src="{{_id}}.jpg" alt="{{title}}" height="317" width="214">
-                            </button>
-                        </div>
-                    {{/each}}
+                <div class="cell-table" style="top:{{top}}; left:{{left}};">
+                    <button type="button" data-type="go-to-movie">
+                        <img src="{{_id}}.jpg" alt="{{title}}" height="317" width="214">
+                    </button>
                 </div>
             {{/each}}
         </div>

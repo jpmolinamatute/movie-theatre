@@ -1,9 +1,10 @@
 <template name="player">
-    <div id="jp-player" class="container-fluid">
+    <div id="jp-player" class="row">
         <div class="col-md-3">
             <button id="player-back" type="button" class="btn btn-success">Back</button>
             <h1>{{title}}</h1>
-            <a href="{{imdbURL}}" target="_blank"><img src="imdblogo2.png" alt="imdb logo"></a>
+            <h6>{{_id}}  {{filetype}}</h6>
+            <a href="http://www.imdb.com/title/{{imdbID}}/" target="_blank"><img src="ui/imdblogo2.png" alt="imdb logo"></a>
         </div>
         <div id="video-player" class="col-md-9">
             <video width="800" height="500" poster="{{_id}}.jpg">

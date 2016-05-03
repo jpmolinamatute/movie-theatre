@@ -2,7 +2,7 @@ div#jp-player{
     background-color: black;
     height: 100%;
 }
-
+div#jp-player h6,
 div#jp-player h1 {
     color: white;
 }
