@@ -1,0 +1,6 @@
+[submodule "ui/packages/meteor-tomi-upload-server"]
+	path = ui/packages/meteor-tomi-upload-server
+	url = https://github.com/tomitrescak/meteor-tomi-upload-server.git
+[submodule "ui/packages/meteor-tomi-upload-jquery"]
+	path = ui/packages/meteor-tomi-upload-jquery
+	url = https://github.com/tomitrescak/meteor-tomi-upload-jquery.git

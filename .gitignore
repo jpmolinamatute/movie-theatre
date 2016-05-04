@@ -1,1 +1,3 @@
 .idea
+ui/public/tmp/*
+!ui/public/tmp/.gitkeep

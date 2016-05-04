@@ -53,7 +53,8 @@
                                 </div>
                             </li>
                             <li>
-                                <input type="file" class="form-control" formenctype="multipart/form-data" accept="image/*">
+                                <!--<input type="file" class="form-control" formenctype="multipart/form-data" accept="image/*">-->
+                                {{> upload_bootstrap contentType='images' fileTypes='.jpg' formData=specificFormData }}
                             </li>
                         {{else}}
                             <li><span class="tag">Id:</span>  {{_id}}</li>

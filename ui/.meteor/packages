@@ -29,3 +29,5 @@ twbs:bootstrap
 accounts-base
 accounts-ui
 accounts-password
+tomi:upload-server
+tomi:upload-jquery

@@ -31,7 +31,8 @@ class Movies(object):
             if not regex.fullmatch(f) and (f.endswith(".mp4") or f.endswith(".mkv")):
                 movieData = {
                     "_id": str(ObjectId()),
-                    "title": f
+                    "title": f,
+                    "flags": []
                 }
                 if f.endswith(".mp4"):
                     movieData["filetype"] = "mp4"

@@ -78,7 +78,13 @@ Template.newMovie.helpers({
         'use strict';
         return moviesCollection.find({}, {sort: {title: 1}});
     },
-
+    specificFormData: function (){
+        'use strict';
+        return {
+            id: this._id,
+            hard: 'Lolcats'
+        }
+    },
     genreList: function (){
         'use strict';
         return moviesGenre.find({}, {sort: {_id: 1}});
