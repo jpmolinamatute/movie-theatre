@@ -30,29 +30,22 @@ Template.player.helpers({
 });
 
 Template.player.events({
-    'click button#player-back': function (event) {
-        'use strict';
-
-        playerActive.set(false);
-        event.stopPropagation();
-    },
-
-    'mouseenter div#video-player video': function (event) {
+    'mouseenter video#video-player': function (event) {
         'use strict';
         event.currentTarget.setAttribute('controls', 'controls');
     },
 
-    'mouseleave div#video-player video': function (event) {
+    'mouseleave video#video-player': function (event) {
         'use strict';
         event.currentTarget.removeAttribute('controls');
     },
-    'play video#jp-video': function(){
+    'play video#video-player': function(){
         'use strict';
         var $input = $("input#video-controls");
         $input.attr("data-status", "play");
 //        $input.focus();
     },
-    'pause video#jp-video': function(){
+    'pause video#video-player': function(){
         'use strict';
         var $input = $("input#video-controls");
         $input.attr("data-status", "pause");

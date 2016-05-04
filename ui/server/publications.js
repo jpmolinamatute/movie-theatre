@@ -76,7 +76,7 @@ Meteor.publish('genre', function () {
 Meteor.publish('active', function () {
     'use strict';
     var user = this.userId;
-    if(!movieActive.findOne({_id: user})){
+    if(user && !movieActive.findOne({_id: user})){
         movieActive.insert({_id: user, movieID: false});
     }
     return movieActive.find({_id: user});

@@ -65,11 +65,17 @@ ul {
 ul#jp-movies-list *{
     text-align: left;
 }
-button.list {
+
+ul#jp-movies-list button.list {
     border: none;
     background-color: transparent;
     padding: 0;
     margin: 0;
+}
+
+ul#jp-movies-list button.error{
+    color: #ff0000;
+    font-weight: bolder;
 }
 
 .jqDropZone {

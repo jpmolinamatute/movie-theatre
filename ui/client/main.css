@@ -3,6 +3,8 @@ body{
     height: 100%;
     width: 100%;
 }
-div#jp-main{
+
+div#jp-main,
+div#jp-main div.row{
    height: 100%;
 }

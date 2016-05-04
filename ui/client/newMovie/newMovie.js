@@ -83,7 +83,10 @@ Template.newMovie.helpers({
         'use strict';
         return moviesGenre.find({}, {sort: {_id: 1}});
     },
-
+    error: function(flags){
+        'use strict';
+        return flags.length > 0
+    },
     sameGenre: function (listGender, genre){
         'use strict';
 

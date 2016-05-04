@@ -2,7 +2,7 @@ Router.route("/", function () {
     "use strict";
     this.subscribe('movies').wait();
     if (this.ready()) {
-        this.render('movies');
+        this.render('list');
     } else{
         this.render('loading');
     }

@@ -26,6 +26,6 @@ standard-minifier-css
 standard-minifier-js
 iron:middleware-stack@1.1.0
 twbs:bootstrap
-accounts-google
 accounts-base
 accounts-ui
+accounts-password
